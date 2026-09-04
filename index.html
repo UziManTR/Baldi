@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE TEACHER - Survival Horror</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- CANVAS FOR 3D RENDERING -->
+    <canvas id="gameCanvas"></canvas>
+
+    <!-- UI OVERLAY -->
+    <div id="uiOverlay">
+        <div id="crosshair">+</div>
+        <div id="hud">
+            <div id="notebookCounter">Notebooks: <span id="notebooksVal">0</span> / 7</div>
+            <div id="staminaBarContainer">
+                <div id="staminaBar"></div>
+            </div>
+            <div id="statusMessage"></div>
+            <div id="interactionPrompt">Press [E] to interact</div>
+        </div>
+    </div>
+
+    <!-- MAIN MENU -->
+    <div id="mainMenu" class="screen overlay-screen active">
+        <div class="menu-title">THE TEACHER</div>
+        <div class="menu-subtitle">Can you gather all 7 notebooks and escape alive?</div>
+        <div class="menu-buttons">
+            <button id="btnPlay" class="btn">PLAY</button>
+            <button id="btnHowToPlay" class="btn">HOW TO PLAY</button>
+            <button id="btnSettings" class="btn">SETTINGS</button>
+        </div>
+    </div>
+
+    <!-- HOW TO PLAY SCREEN -->
+    <div id="howToPlayScreen" class="screen overlay-screen hidden">
+        <h2>HOW TO PLAY</h2>
+        <div class="instructions">
+            <p><strong>Controls:</strong></p>
+            <ul>
+                <li><strong>WASD:</strong> Move</li>
+                <li><strong>Mouse:</strong> Look Around</li>
+                <li><strong>SHIFT:</strong> Run (Consumes Stamina)</li>
+                <li><strong>E:</strong> Collect Notebook / Open Exit</li>
+                <li><strong>ESC:</strong> Unlock Mouse Cursor</li>
+            </ul>
+            <p><strong>Objective:</strong> Collect all 7 Notebooks scattered across the school building and escape through any EXIT door.</p>
+            <p><strong>Warning:</strong> THE TEACHER gets faster and more aggressive with every notebook collected. Running makes noise that alerts him. Manage your stamina wisely!</p>
+        </div>
+        <button id="btnBackFromHTP" class="btn">BACK</button>
+    </div>
+
+    <!-- SETTINGS SCREEN -->
+    <div id="settingsScreen" class="screen overlay-screen hidden">
+        <h2>SETTINGS</h2>
+        <div class="settings-form">
+            <div class="setting-item">
+                <label for="masterVolume">Master Volume</label>
+                <input type="range" id="masterVolume" min="0" max="100" value="80">
+            </div>
+            <div class="setting-item">
+                <label for="sfxVolume">SFX Volume</label>
+                <input type="range" id="sfxVolume" min="0" max="100" value="100">
+            </div>
+            <div class="setting-item">
+                <label for="mouseSensitivity">Mouse Sensitivity</label>
+                <input type="range" id="mouseSensitivity" min="1" max="10" value="3">
+            </div>
+        </div>
+        <button id="btnBackFromSettings" class="btn">BACK</button>
+    </div>
+
+    <!-- DEATH SCREEN -->
+    <div id="deathScreen" class="screen overlay-screen hidden">
+        <h1 class="scary-text">YOU WERE CAUGHT</h1>
+        <p>The Teacher caught you. Practice your routes and control your noise!</p>
+        <div class="menu-buttons">
+            <button id="btnRetryDeath" class="btn">RETRY</button>
+            <button id="btnMenuDeath" class="btn">MAIN MENU</button>
+        </div>
+    </div>
+
+    <!-- WIN SCREEN -->
+    <div id="winScreen" class="screen overlay-screen hidden">
+        <h1 class="win-text">YOU ESCAPED!</h1>
+        <p>You collected all 7 notebooks and survived the horror!</p>
+        <div class="menu-buttons">
+            <button id="btnReplayWin" class="btn">REPLAY</button>
+            <button id="btnMenuWin" class="btn">MAIN MENU</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
