@@ -3,6 +3,7 @@
     margin: 0;
     padding: 0;
     user-select: none;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', sans-serif;
 }
 
 body, html {
@@ -10,18 +11,26 @@ body, html {
     height: 100%;
     overflow: hidden;
     background-color: #000;
-    font-family: 'Courier New', Courier, monospace;
-    color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
-#gameCanvas {
+#game-container {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    background: #111;
+}
+
+canvas {
     width: 100%;
     height: 100%;
     display: block;
     image-rendering: pixelated;
 }
 
-#uiOverlay {
+#ui-layer {
     position: absolute;
     top: 0;
     left: 0;
@@ -35,8 +44,8 @@ body, html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+    color: #00ff00;
     font-size: 24px;
-    color: rgba(255, 255, 255, 0.6);
     font-weight: bold;
 }
 
@@ -44,178 +53,113 @@ body, html {
     position: absolute;
     top: 20px;
     left: 20px;
-    right: 20px;
-    bottom: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    color: #fff;
+    text-shadow: 2px 2px #000;
 }
 
-#notebookCounter {
-    font-size: 24px;
-    background: rgba(0, 0, 0, 0.6);
-    padding: 10px 15px;
-    border-radius: 5px;
-    border: 1px solid #ff0000;
-    width: fit-content;
-    color: #ff3333;
-    font-weight: bold;
+#notebook-count {
+    font-size: 22px;
+    margin-bottom: 10px;
 }
 
-#staminaBarContainer {
-    width: 250px;
-    height: 20px;
-    background: rgba(50, 50, 50, 0.8);
-    border: 2px solid #555;
-    border-radius: 3px;
-    overflow: hidden;
+#stamina-bar-container {
+    width: 200px;
+    height: 18px;
+    border: 2px solid #fff;
+    background-color: rgba(0, 0, 0, 0.6);
 }
 
-#staminaBar {
+#stamina-bar {
     width: 100%;
     height: 100%;
-    background: #00ff66;
-    transition: width 0.1s linear, background-color 0.2s;
+    background-color: #00ff00;
+    transition: width 0.1s linear;
 }
 
-#interactionPrompt {
+#interaction-prompt {
     position: absolute;
-    bottom: 80px;
+    bottom: 40px;
     left: 50%;
     transform: translateX(-50%);
-    background: rgba(0, 0, 0, 0.8);
     color: #ffff00;
-    padding: 10px 20px;
-    border: 1px solid #ffff00;
-    border-radius: 5px;
     font-size: 18px;
+    background: rgba(0,0,0,0.7);
+    padding: 8px 16px;
+    border-radius: 4px;
     display: none;
 }
 
-#statusMessage {
-    position: absolute;
-    top: 80px;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 22px;
-    color: #ff3333;
-    font-weight: bold;
-    text-shadow: 2px 2px #000;
-    text-align: center;
-}
-
-/* OVERLAY SCREENS */
-.overlay-screen {
+.modal {
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(10, 10, 12, 0.95);
+    background: rgba(0, 0, 0, 0.85);
     display: flex;
-    flex-direction: column;
     justify-content: center;
     align-items: center;
-    z-index: 100;
+    z-index: 10;
 }
 
-.hidden {
+.modal.hidden {
     display: none !important;
 }
 
-.menu-title {
-    font-size: 64px;
-    color: #ff0000;
-    letter-spacing: 5px;
-    margin-bottom: 10px;
-    text-shadow: 0 0 15px rgba(255, 0, 0, 0.8);
-}
-
-.menu-subtitle {
-    font-size: 18px;
-    color: #aaa;
-    margin-bottom: 40px;
-}
-
-.menu-buttons {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.btn {
-    padding: 12px 30px;
-    font-size: 20px;
-    font-family: inherit;
-    background: #111;
+.modal-content {
+    background: #355e3b;
+    border: 6px solid #8b4513;
+    padding: 30px;
+    text-align: center;
     color: #fff;
-    border: 2px solid #888;
-    cursor: pointer;
-    min-width: 200px;
-    transition: all 0.2s ease;
+    border-radius: 8px;
+    min-width: 300px;
 }
 
-.btn:hover {
-    background: #ff0000;
+.modal-content.danger {
+    background: #8b0000;
     border-color: #ff0000;
-    color: #000;
-    box-shadow: 0 0 10px #ff0000;
 }
 
-.instructions {
-    max-width: 600px;
-    background: rgba(20, 20, 20, 0.8);
-    padding: 20px;
-    border: 1px solid #444;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    line-height: 1.6;
+.modal-content.success {
+    background: #006400;
+    border-color: #00ff00;
 }
 
-.instructions ul {
-    margin-left: 20px;
+.modal-content h1, .modal-content h2 {
     margin-bottom: 15px;
 }
 
-.settings-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    width: 300px;
-    margin-bottom: 30px;
+.modal-content p {
+    margin-bottom: 20px;
 }
 
-.setting-item {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.setting-item label {
-    font-size: 16px;
-    color: #ccc;
-}
-
-.setting-item input[type=range] {
+.btn {
+    display: block;
     width: 100%;
+    padding: 12px;
+    margin: 10px 0;
+    background: #ffff00;
+    color: #000;
+    border: none;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 4px;
 }
 
-.scary-text {
-    font-size: 72px;
-    color: #ff0000;
-    text-shadow: 0 0 20px #ff0000;
-    margin-bottom: 20px;
-    animation: pulse 1s infinite alternate;
+.btn:hover {
+    background: #e6e600;
 }
 
-.win-text {
-    font-size: 72px;
-    color: #00ff66;
-    text-shadow: 0 0 20px #00ff66;
-    margin-bottom: 20px;
+.math-board {
+    background: #004d25;
 }
 
-@keyframes pulse {
-    from { opacity: 0.7; transform: scale(0.98); }
-    to { opacity: 1; transform: scale(1.02); }
+.math-board input {
+    width: 80%;
+    padding: 10px;
+    font-size: 20px;
+    text-align: center;
+    margin: 15px 0;
 }
