@@ -3,92 +3,70 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE TEACHER - Survival Horror</title>
+    <title>Baldi's Basics Classic HTML5</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- CANVAS FOR 3D RENDERING -->
-    <canvas id="gameCanvas"></canvas>
+    <div id="game-container">
+        <!-- Canvas Rendering Layer -->
+        <canvas id="gameCanvas"></canvas>
 
-    <!-- UI OVERLAY -->
-    <div id="uiOverlay">
-        <div id="crosshair">+</div>
-        <div id="hud">
-            <div id="notebookCounter">Notebooks: <span id="notebooksVal">0</span> / 7</div>
-            <div id="staminaBarContainer">
-                <div id="staminaBar"></div>
+        <!-- UI Overlay Layer -->
+        <div id="ui-layer">
+            <div id="crosshair">+</div>
+            <div id="hud">
+                <div id="notebook-count">Notebooks: 0 / 7</div>
+                <div id="stamina-bar-container">
+                    <div id="stamina-bar"></div>
+                </div>
             </div>
-            <div id="statusMessage"></div>
-            <div id="interactionPrompt">Press [E] to interact</div>
+            <div id="interaction-prompt">Eksik Notebook'u almak için tıkla / [E]</div>
         </div>
-    </div>
 
-    <!-- MAIN MENU -->
-    <div id="mainMenu" class="screen overlay-screen active">
-        <div class="menu-title">THE TEACHER</div>
-        <div class="menu-subtitle">Can you gather all 7 notebooks and escape alive?</div>
-        <div class="menu-buttons">
-            <button id="btnPlay" class="btn">PLAY</button>
-            <button id="btnHowToPlay" class="btn">HOW TO PLAY</button>
-            <button id="btnSettings" class="btn">SETTINGS</button>
-        </div>
-    </div>
-
-    <!-- HOW TO PLAY SCREEN -->
-    <div id="howToPlayScreen" class="screen overlay-screen hidden">
-        <h2>HOW TO PLAY</h2>
-        <div class="instructions">
-            <p><strong>Controls:</strong></p>
-            <ul>
-                <li><strong>WASD:</strong> Move</li>
-                <li><strong>Mouse:</strong> Look Around</li>
-                <li><strong>SHIFT:</strong> Run (Consumes Stamina)</li>
-                <li><strong>E:</strong> Collect Notebook / Open Exit</li>
-                <li><strong>ESC:</strong> Unlock Mouse Cursor</li>
-            </ul>
-            <p><strong>Objective:</strong> Collect all 7 Notebooks scattered across the school building and escape through any EXIT door.</p>
-            <p><strong>Warning:</strong> THE TEACHER gets faster and more aggressive with every notebook collected. Running makes noise that alerts him. Manage your stamina wisely!</p>
-        </div>
-        <button id="btnBackFromHTP" class="btn">BACK</button>
-    </div>
-
-    <!-- SETTINGS SCREEN -->
-    <div id="settingsScreen" class="screen overlay-screen hidden">
-        <h2>SETTINGS</h2>
-        <div class="settings-form">
-            <div class="setting-item">
-                <label for="masterVolume">Master Volume</label>
-                <input type="range" id="masterVolume" min="0" max="100" value="80">
-            </div>
-            <div class="setting-item">
-                <label for="sfxVolume">SFX Volume</label>
-                <input type="range" id="sfxVolume" min="0" max="100" value="100">
-            </div>
-            <div class="setting-item">
-                <label for="mouseSensitivity">Mouse Sensitivity</label>
-                <input type="range" id="mouseSensitivity" min="1" max="10" value="3">
+        <!-- Main Menu Modal -->
+        <div id="main-menu" class="modal">
+            <div class="modal-content">
+                <h1>BALDI'S BASICS CLASSIC</h1>
+                <p>Ses Sürümü Yok - Sessiz Mod</p>
+                <button id="btn-play" class="btn">OYUNA BAŞLA</button>
             </div>
         </div>
-        <button id="btnBackFromSettings" class="btn">BACK</button>
-    </div>
 
-    <!-- DEATH SCREEN -->
-    <div id="deathScreen" class="screen overlay-screen hidden">
-        <h1 class="scary-text">YOU WERE CAUGHT</h1>
-        <p>The Teacher caught you. Practice your routes and control your noise!</p>
-        <div class="menu-buttons">
-            <button id="btnRetryDeath" class="btn">RETRY</button>
-            <button id="btnMenuDeath" class="btn">MAIN MENU</button>
+        <!-- Notebook Question Modal -->
+        <div id="notebook-modal" class="modal hidden">
+            <div class="modal-content math-board">
+                <h2>DEFTER SORUSU</h2>
+                <div id="math-question">5 + 7 = ?</div>
+                <input type="number" id="math-answer" placeholder="Cevap" autofocus>
+                <button id="btn-submit-answer" class="btn">GÖNDER</button>
+            </div>
         </div>
-    </div>
 
-    <!-- WIN SCREEN -->
-    <div id="winScreen" class="screen overlay-screen hidden">
-        <h1 class="win-text">YOU ESCAPED!</h1>
-        <p>You collected all 7 notebooks and survived the horror!</p>
-        <div class="menu-buttons">
-            <button id="btnReplayWin" class="btn">REPLAY</button>
-            <button id="btnMenuWin" class="btn">MAIN MENU</button>
+        <!-- Pause Menu Modal -->
+        <div id="pause-menu" class="modal hidden">
+            <div class="modal-content">
+                <h2>DURDURULDU</h2>
+                <button id="btn-resume" class="btn">DEVAM ET</button>
+                <button id="btn-restart-pause" class="btn">YENİDEN BAŞLAT</button>
+            </div>
+        </div>
+
+        <!-- Game Over Modal -->
+        <div id="game-over-menu" class="modal hidden">
+            <div class="modal-content danger">
+                <h2>BALDI SENİ YAKALADI!</h2>
+                <p>Oyun Bitti!</p>
+                <button id="btn-restart-over" class="btn">TEKRAR DENE</button>
+            </div>
+        </div>
+
+        <!-- Win Modal -->
+        <div id="win-menu" class="modal hidden">
+            <div class="modal-content success">
+                <h2>TEBRİKLER!</h2>
+                <p>Tüm defterleri toplayıp okuldan kaçmayı başardın!</p>
+                <button id="btn-restart-win" class="btn">TEKRAR OYNA</button>
+            </div>
         </div>
     </div>
 
