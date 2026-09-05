@@ -3,72 +3,12 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Baldi's Basics Classic HTML5</title>
+    <title>Baldi's Basic's Classic Remastered</title>
     <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
-    <div id="game-container">
-        <!-- Canvas Rendering Layer -->
-        <canvas id="gameCanvas"></canvas>
-
-        <!-- UI Overlay Layer -->
-        <div id="ui-layer">
-            <div id="crosshair">+</div>
-            <div id="hud">
-                <div id="notebook-count">Notebooks: 0 / 7</div>
-                <div id="stamina-bar-container">
-                    <div id="stamina-bar"></div>
-                </div>
-            </div>
-            <div id="interaction-prompt">Eksik Notebook'u almak için tıkla / [E]</div>
-        </div>
-
-        <!-- Main Menu Modal -->
-        <div id="main-menu" class="modal">
-            <div class="modal-content">
-                <h1>BALDI'S BASICS CLASSIC</h1>
-                <p>Ses Sürümü Yok - Sessiz Mod</p>
-                <button id="btn-play" class="btn">OYUNA BAŞLA</button>
-            </div>
-        </div>
-
-        <!-- Notebook Question Modal -->
-        <div id="notebook-modal" class="modal hidden">
-            <div class="modal-content math-board">
-                <h2>DEFTER SORUSU</h2>
-                <div id="math-question">5 + 7 = ?</div>
-                <input type="number" id="math-answer" placeholder="Cevap" autofocus>
-                <button id="btn-submit-answer" class="btn">GÖNDER</button>
-            </div>
-        </div>
-
-        <!-- Pause Menu Modal -->
-        <div id="pause-menu" class="modal hidden">
-            <div class="modal-content">
-                <h2>DURDURULDU</h2>
-                <button id="btn-resume" class="btn">DEVAM ET</button>
-                <button id="btn-restart-pause" class="btn">YENİDEN BAŞLAT</button>
-            </div>
-        </div>
-
-        <!-- Game Over Modal -->
-        <div id="game-over-menu" class="modal hidden">
-            <div class="modal-content danger">
-                <h2>BALDI SENİ YAKALADI!</h2>
-                <p>Oyun Bitti!</p>
-                <button id="btn-restart-over" class="btn">TEKRAR DENE</button>
-            </div>
-        </div>
-
-        <!-- Win Modal -->
-        <div id="win-menu" class="modal hidden">
-            <div class="modal-content success">
-                <h2>TEBRİKLER!</h2>
-                <p>Tüm defterleri toplayıp okuldan kaçmayı başardın!</p>
-                <button id="btn-restart-win" class="btn">TEKRAR OYNA</button>
-            </div>
-        </div>
-    </div>
+    <canvas id="canvas" width="800" height="630"></canvas>
 
     <script src="script.js"></script>
 </body>
